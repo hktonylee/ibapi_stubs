@@ -48,6 +48,7 @@ echo "$versions_to_process" | while read -r version; do
             done
 
         "$python_bin_dir/stubgen" --ignore-errors -o "$SCRIPT_ROOT/../src" "${stubgen_args[@]}"
+        mypy "$SCRIPT_ROOT/../src/ibapi" "$SCRIPT_ROOT/../src/ibapi_stubs"
 
         cd "$SCRIPT_ROOT/.."
         git add .

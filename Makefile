@@ -1,7 +1,7 @@
 
 all: build
 
-build: pyproject.toml requirements.txt .pre-commit-config.yaml $(wildcard src/**/*)
+build: pyproject.toml .pre-commit-config.yaml $(wildcard src/**/*)
 	python3 -m build
 
 clean:
