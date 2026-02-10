@@ -10,4 +10,7 @@ clean:
 upload: clean build
 	twine upload --repository codeartifact dist/*
 
-.PHONY: all clean build upload
+generate-stubs: scripts/generate_stubs
+	scripts/generate_stubs
+
+.PHONY: all clean build upload generate-stubs

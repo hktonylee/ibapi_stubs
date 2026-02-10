@@ -1,0 +1,61 @@
+#!/usr/bin/env zsh
+
+SCRIPT_ROOT="${${(%):-%x}:a:h}"
+
+tmpdir="$SCRIPT_ROOT/tmp.generate_stubs"
+
+virtualenv -p python3 "$tmpdir/.venv.stubgen"
+
+python_bin_dir="$tmpdir/.venv.stubgen/bin"
+python_bin="$python_bin_dir/python"
+
+"$python_bin" -m pip install mypy setuptools
+
+# "$python_bin" -m pip install ibapi
+
+git clone git@github.com:InteractiveBrokers/tws-api.git "$tmpdir/tws-api"
+all_tws_api_versions="$(cd "$tmpdir/tws-api" && git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort)"
+all_stub_versions="$(git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort)"
+
+# find only the versions that are not in the stub_versions
+versions_to_process="$(comm -23 <(echo "$all_tws_api_versions") <(echo "$all_stub_versions"))"
+
+for version in $versions_to_process; do
+    (
+        echo "================================================"
+        echo "Processing version: $version..."
+
+        git checkout master
+        git checout -b "$version"
+        cd "$tmpdir/tws-api"
+        git checkout $version
+
+        cd "source/pythonclient/"
+        "$python_bin" setup.py install
+        "$python_bin_dir/stubgen" -m ibapi -o "$SCRIPT_ROOT/../src"
+
+        ibapi_root="$("$python_bin" -c "import ibapi; import os; print(os.path.dirname(ibapi.__file__))")"
+        echo "ibapi_root: $ibapi_root"
+        find "$ibapi_root" -maxdepth 1 -name "*.py" -not -name "_*.py" -printf "%f\n" | \
+            while read -r file; do
+                "$python_bin_dir/stubgen" -m ibapi.${file%.py} -o "$SCRIPT_ROOT/../src"
+            done
+
+        rm -rf "$tmpdir"
+
+        cd "$SCRIPT_ROOT/.."
+        git add .
+        git commit -m "Add stubs for $version"
+
+        echo
+    )
+done
+
+# ibapi_root="$("$python_bin" -c "import ibapi; import os; print(os.path.dirname(ibapi.__file__))")"
+# echo "ibapi_root: $ibapi_root"
+# find "$ibapi_root" -maxdepth 1 -name "*.py" -not -name "_*.py" -printf "%f\n" | \
+#     while read -r file; do
+#         "$python_bin_dir/stubgen" -m ibapi.${file%.py} -o "$SCRIPT_ROOT/../src"
+#     done
+
+# rm -rf "$tmpdir"
