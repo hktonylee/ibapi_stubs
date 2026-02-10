@@ -30,8 +30,8 @@ echo "$versions_to_process" | while read -r version; do
         git checkout master
         git checkout -b "$version"
         cd "$tmpdir/tws-api"
-        git reset --hard
-        git checkout "$version"
+        git reset --hard HEAD
+        git checkout --force "$version"
 
         cd "source/pythonclient/"
         "$python_bin" setup.py install
