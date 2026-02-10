@@ -54,6 +54,11 @@ echo "$versions_to_process" | while read -r version; do
         git add .
         git commit -m "Add stubs for $version"
 
+        # change the branch into tag
+        git checkout master
+        git tag "$version" "$version"
+        git branch -D "$version"
+
         echo
     )
 done
