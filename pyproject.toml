@@ -1,13 +1,13 @@
 
 # -----------------------------------------------------------------------------------------------
 [project]
-name = "ibapi_stubs"
+name = "types-ibapi"
 dynamic = ["version"]
-description = "This is the Python package ibapi_stubs."
+description = "This is the Python package types-ibapi."
 
 readme = "README.md"
 requires-python = ">=3.8"
-license = "MIT"
+license = {text = "MIT"}
 authors = [
     { name = "Tony Lee", email = "iamtonylee@gmail.com" },
 ]
