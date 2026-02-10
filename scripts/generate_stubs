@@ -16,8 +16,8 @@ python_bin="$python_bin_dir/python"
 # "$python_bin" -m pip install ibapi
 
 git clone git@github.com:InteractiveBrokers/tws-api.git "$tmpdir/tws-api"
-all_tws_api_versions="$(cd "$tmpdir/tws-api" && git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort)"
 all_stub_versions="$(git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort)"
+all_tws_api_versions="$(cd "$tmpdir/tws-api" && git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort)"
 
 # find only the versions that are not in the stub_versions
 versions_to_process="$(comm -23 <(echo "$all_tws_api_versions") <(echo "$all_stub_versions"))"
