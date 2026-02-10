@@ -25,7 +25,7 @@ echo "$versions_to_process" | while read -r version; do
         echo "================================================"
         echo "Processing version: $version..."
 
-        git checkout master
+        git checkout --force master
         git checkout -b "$version"
         cd "$tmpdir/tws-api"
         git reset --hard HEAD
@@ -60,6 +60,7 @@ echo "$versions_to_process" | while read -r version; do
         git branch -D "$version"
 
         # build the package
+        git checkout "$version"
         make build
 
         echo
