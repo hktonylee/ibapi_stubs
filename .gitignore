@@ -5,3 +5,4 @@ dist
 *.py[co]
 __pycache__
 venv
+tmp.*
