@@ -59,6 +59,9 @@ echo "$versions_to_process" | while read -r version; do
         git tag "$version" "$version"
         git branch -D "$version"
 
+        # build the package
+        make build
+
         echo
     )
 done
