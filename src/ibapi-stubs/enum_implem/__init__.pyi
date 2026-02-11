@@ -1,0 +1,6 @@
+from _typeshed import Incomplete
+
+class Enum:
+    idx2name: Incomplete
+    def __init__(self, *args) -> None: ...
+    def toStr(self, idx): ...
