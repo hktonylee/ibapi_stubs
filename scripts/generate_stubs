@@ -60,7 +60,9 @@ echo "$versions_to_process" | while read -r version; do
 
         # rename the directory to ibapi-stubs
         mv "$SCRIPT_ROOT/../src/ibapi" "$SCRIPT_ROOT/../src/ibapi-stubs"
-        touch "$SCRIPT_ROOT/../src/ibapi-stubs/py.typed"
+
+        # create the py.typed file
+        touch "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi/py.typed"
 
         # need to fix the package directory structure
         find "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi" -maxdepth 1 -name "*.pyi" -not -name "_*.pyi" -printf "%f\n" | \
