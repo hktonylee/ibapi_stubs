@@ -56,17 +56,20 @@ echo "$versions_to_process" | while read -r version; do
                 cat "$file_path" | rg --passthru '(.*)# type:.*' -r '$1' | sponge "$file_path"
             done
 
-        "$python_bin_dir/stubgen" --ignore-errors -o "$SCRIPT_ROOT/../src/ibapi-stubs" "${stubgen_args[@]}"
+        "$python_bin_dir/stubgen" --ignore-errors -o "$SCRIPT_ROOT/../src/" "${stubgen_args[@]}"
+
+        # rename the directory to ibapi-stubs
+        mv "$SCRIPT_ROOT/../src/ibapi" "$SCRIPT_ROOT/../src/ibapi-stubs"
 
         # create the py.typed file
-        touch "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi/py.typed"
+        touch "$SCRIPT_ROOT/../src/ibapi-stubs/py.typed"
 
         # need to fix the package directory structure
-        find "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi" -maxdepth 1 -name "*.pyi" -not -name "_*.pyi" -printf "%f\n" | \
+        find "$SCRIPT_ROOT/../src/ibapi-stubs" -maxdepth 1 -name "*.pyi" -not -name "_*.pyi" -printf "%f\n" | \
             while read -r file_name; do
                 module_name="${file_name%.pyi}"
-                mkdir -p "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi/$module_name"
-                mv "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi/$file_name" "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi/$module_name/__init__.pyi"
+                mkdir -p "$SCRIPT_ROOT/../src/ibapi-stubs/$module_name"
+                mv "$SCRIPT_ROOT/../src/ibapi-stubs/$file_name" "$SCRIPT_ROOT/../src/ibapi-stubs/$module_name/__init__.pyi"
             done
 
         cd "$SCRIPT_ROOT/.."
