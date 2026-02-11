@@ -54,6 +54,21 @@ source = "vcs"
 # Typical: tags like v1.2.3 or 1.2.3 are accepted; tune if needed.
 version_scheme = "guess-next-dev"
 
+[tool.hatch.build.targets.wheel]
+# No Python packages; we're shipping stub files as wheel data
+packages = []
+include = [
+  "src/ibapi-stubs/**",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/ibapi-stubs/**",
+  "pyproject.toml",
+  "README.md",
+  "LICENSE",
+]
+
 
 # -----------------------------------------------------------------------------------------------
 # [tool.setuptools]
