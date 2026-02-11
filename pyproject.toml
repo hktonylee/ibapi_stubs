@@ -37,11 +37,6 @@ Repository = "https://github.com/hktonylee/ibapi_stubs"
 
 
 # -----------------------------------------------------------------------------------------------
-[project.scripts]
-ibapi_stubs = "ibapi_stubs.cli:main"
-
-
-# -----------------------------------------------------------------------------------------------
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
@@ -60,6 +55,9 @@ packages = []
 include = [
   "src/ibapi-stubs/**",
 ]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/ibapi-stubs" = "ibapi-stubs"
 
 [tool.hatch.build.targets.sdist]
 include = [
