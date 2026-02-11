@@ -8,7 +8,7 @@ if [ -z "$ARG_RELEASE_TAG" ]; then
     echo "Usage: $0 <release_tag>" >&2
     echo "" >&2
     echo "Please refer to https://packaging.python.org/en/latest/discussions/versioning/ for the release tag format" >&2
-    echo "Example release_tag: a1 / b1 / rc1 / post1 / dev0" >&2
+    echo "Example release_tag: a1 / b1 / rc1 / .post1 / .dev0 (Note the dot prefix)" >&2
     exit 1
 fi
 
@@ -62,8 +62,8 @@ echo "$versions_to_process" | while read -r version; do
 
         cd "$SCRIPT_ROOT/.."
         git add .
-        git commit -m "Add stubs for $version.$ARG_RELEASE_TAG"
-        git tag "$version.$ARG_RELEASE_TAG"
+        git commit -m "Add stubs for $version$ARG_RELEASE_TAG"
+        git tag "$version$ARG_RELEASE_TAG"
 
         # build the package
         make build
