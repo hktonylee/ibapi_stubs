@@ -56,10 +56,7 @@ echo "$versions_to_process" | while read -r version; do
                 cat "$file_path" | rg --passthru '(.*)# type:.*' -r '$1' | sponge "$file_path"
             done
 
-        "$python_bin_dir/stubgen" --ignore-errors -o "$SCRIPT_ROOT/../src" "${stubgen_args[@]}"
-
-        # rename the directory to ibapi-stubs
-        mv "$SCRIPT_ROOT/../src/ibapi" "$SCRIPT_ROOT/../src/ibapi-stubs"
+        "$python_bin_dir/stubgen" --ignore-errors -o "$SCRIPT_ROOT/../src/ibapi-stubs" "${stubgen_args[@]}"
 
         # create the py.typed file
         touch "$SCRIPT_ROOT/../src/ibapi-stubs/ibapi/py.typed"
