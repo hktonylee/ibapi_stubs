@@ -1,0 +1,6 @@
+from ibapi.contract import Contract as Contract
+from ibapi.execution import Execution as Execution
+from ibapi.utils import floatMaxString as floatMaxString
+
+def decodeContract(contractProto): ...
+def decodeExecution(executionProto): ...
