@@ -57,6 +57,17 @@ echo "$versions_to_process" | while read -r version; do
             done
 
         "$python_bin_dir/stubgen" --ignore-errors -o "$SCRIPT_ROOT/../src" "${stubgen_args[@]}"
+
+        # need to fix the package directory structure
+        find "$SCRIPT_ROOT/../src/ibapi" -maxdepth 1 -name "*.py" -printf "%f\n" | \
+            while read -r file_name; do
+                module_name="${file_name%.py}"
+                mkdir -p "$SCRIPT_ROOT/../src/ibapi-stubs/$module_name"
+                mv "$SCRIPT_ROOT/../src/ibapi/$file_name" "$SCRIPT_ROOT/../src/ibapi-stubs/$module_name/__init__.py"
+            done
+
+
+        # rename the directory to ibapi-stubs
         mv "$SCRIPT_ROOT/../src/ibapi" "$SCRIPT_ROOT/../src/ibapi-stubs"
         touch "$SCRIPT_ROOT/../src/ibapi-stubs/py.typed"
 
