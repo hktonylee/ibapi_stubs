@@ -4,7 +4,7 @@ set -e
 
 ARG_RELEASE_TAG="${1#.}"
 
-if [ -z "$ARG_RELEASE_TAG" ]; then
+if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <release_tag>" >&2
     echo "" >&2
     echo "Please refer to https://packaging.python.org/en/latest/discussions/versioning/ for the release tag format" >&2
@@ -24,8 +24,8 @@ python_bin="$python_bin_dir/python"
 "$python_bin" -m pip install mypy setuptools
 
 git clone git@github.com:InteractiveBrokers/tws-api.git "$tmpdir/tws-api"
-all_stub_versions="$(git branch | rg '\s+([0-9]+\.[0-9]+\.[0-9]+)$' -r '$1' | sort)"
-all_tws_api_versions="$(cd "$tmpdir/tws-api" && git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort)"
+all_stub_versions="$(git branch | rg '\s+([0-9]+\.[0-9]+\.[0-9]+)$' -r '$1' | sort -rn)"
+all_tws_api_versions="$(cd "$tmpdir/tws-api" && git tag | rg '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -rn)"
 
 # find only the versions that are not in the stub_versions
 versions_to_process="$(comm -23 <(echo "$all_tws_api_versions") <(echo "$all_stub_versions"))"
