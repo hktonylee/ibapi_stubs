@@ -43,23 +43,30 @@ ibapi_stubs = "ibapi_stubs.cli:main"
 
 # -----------------------------------------------------------------------------------------------
 [build-system]
-requires = ["setuptools >= 64", "setuptools_scm >= 8"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+# -----------------------------------------------------------------------------------------------
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+# Typical: tags like v1.2.3 or 1.2.3 are accepted; tune if needed.
+version_scheme = "guess-next-dev"
 
 
 # -----------------------------------------------------------------------------------------------
-[tool.setuptools.packages.find]
-where = ["./src/"]
-include = ["ibapi_stubs"]
-
-
-# -----------------------------------------------------------------------------------------------
-[tool.setuptools.package-data]
-ibapi_stubs = ["py.typed"]
-
-
-# -----------------------------------------------------------------------------------------------
-[tool.setuptools_scm]
+# [tool.setuptools]
+# package-dir = {"" = "src" }
+# 
+# [tool.setuptools.packages.find]
+# where = ["./src/"]
+# include = []
+# 
+# [tool.setuptools.package-data]
+# "ibapi-stubs" = ["py.typed", "**/*.pyi"]
+# 
+# [tool.setuptools_scm]
 
 
 # -----------------------------------------------------------------------------------------------

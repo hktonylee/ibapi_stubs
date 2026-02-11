@@ -2,6 +2,16 @@
 
 set -e
 
+ARG_RELEASE_TAG="${1#.}"
+
+if [ -z "$ARG_RELEASE_TAG" ]; then
+    echo "Usage: $0 <release_tag>" >&2
+    echo "" >&2
+    echo "Please refer to https://packaging.python.org/en/latest/discussions/versioning/ for the release tag format" >&2
+    echo "Example release_tag: a1 / b1 / rc1 / post1 / dev0" >&2
+    exit 1
+fi
+
 SCRIPT_ROOT="${${(%):-%x}:a:h}"
 
 tmpdir="$(mktemp -d "$SCRIPT_ROOT/tmp.XXXXXX")"
@@ -25,8 +35,7 @@ echo "$versions_to_process" | while read -r version; do
         echo "================================================"
         echo "Processing version: $version..."
 
-        git checkout --force master
-        git checkout -b "$version"
+        git checkout --force --detach master
         cd "$tmpdir/tws-api"
         git reset --hard HEAD
         git checkout --force "$version"
@@ -53,15 +62,10 @@ echo "$versions_to_process" | while read -r version; do
 
         cd "$SCRIPT_ROOT/.."
         git add .
-        git commit -m "Add stubs for $version"
-
-        # change the branch into tag
-        git checkout master
-        git tag "$version" "$version"
-        git branch -D "$version"
+        git commit -m "Add stubs for $version.$ARG_RELEASE_TAG"
+        git tag "$version.$ARG_RELEASE_TAG"
 
         # build the package
-        git checkout "$version"
         make build
 
         echo
