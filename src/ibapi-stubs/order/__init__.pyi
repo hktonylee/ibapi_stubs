@@ -1,0 +1,157 @@
+from _typeshed import Incomplete
+from ibapi.common import DOUBLE_INFINITY as DOUBLE_INFINITY, UNSET_DECIMAL as UNSET_DECIMAL, UNSET_DOUBLE as UNSET_DOUBLE, UNSET_INTEGER as UNSET_INTEGER
+from ibapi.object_implem import Object as Object
+from ibapi.softdollartier import SoftDollarTier as SoftDollarTier
+from ibapi.utils import decimalMaxString as decimalMaxString, floatMaxString as floatMaxString, intMaxString as intMaxString
+
+CUSTOMER: Incomplete
+FIRM: Incomplete
+UNKNOWN: Incomplete
+AUCTION_UNSET: Incomplete
+AUCTION_MATCH: Incomplete
+AUCTION_IMPROVEMENT: Incomplete
+AUCTION_TRANSPARENT: Incomplete
+COMPETE_AGAINST_BEST_OFFSET_UP_TO_MID = DOUBLE_INFINITY
+
+class OrderComboLeg(Object):
+    price: Incomplete
+    def __init__(self) -> None: ...
+
+class Order(Object):
+    softDollarTier: Incomplete
+    orderId: int
+    clientId: int
+    permId: int
+    action: str
+    totalQuantity: Incomplete
+    orderType: str
+    lmtPrice: Incomplete
+    auxPrice: Incomplete
+    tif: str
+    activeStartTime: str
+    activeStopTime: str
+    ocaGroup: str
+    ocaType: int
+    orderRef: str
+    transmit: bool
+    parentId: int
+    blockOrder: bool
+    sweepToFill: bool
+    displaySize: int
+    triggerMethod: int
+    outsideRth: bool
+    hidden: bool
+    goodAfterTime: str
+    goodTillDate: str
+    rule80A: str
+    allOrNone: bool
+    minQty: Incomplete
+    percentOffset: Incomplete
+    overridePercentageConstraints: bool
+    trailStopPrice: Incomplete
+    trailingPercent: Incomplete
+    faGroup: str
+    faProfile: str
+    faMethod: str
+    faPercentage: str
+    designatedLocation: str
+    openClose: str
+    origin: Incomplete
+    shortSaleSlot: int
+    exemptCode: int
+    discretionaryAmt: int
+    optOutSmartRouting: bool
+    auctionStrategy: Incomplete
+    startingPrice: Incomplete
+    stockRefPrice: Incomplete
+    delta: Incomplete
+    stockRangeLower: Incomplete
+    stockRangeUpper: Incomplete
+    randomizePrice: bool
+    randomizeSize: bool
+    volatility: Incomplete
+    volatilityType: Incomplete
+    deltaNeutralOrderType: str
+    deltaNeutralAuxPrice: Incomplete
+    deltaNeutralConId: int
+    deltaNeutralSettlingFirm: str
+    deltaNeutralClearingAccount: str
+    deltaNeutralClearingIntent: str
+    deltaNeutralOpenClose: str
+    deltaNeutralShortSale: bool
+    deltaNeutralShortSaleSlot: int
+    deltaNeutralDesignatedLocation: str
+    continuousUpdate: bool
+    referencePriceType: Incomplete
+    basisPoints: Incomplete
+    basisPointsType: Incomplete
+    scaleInitLevelSize: Incomplete
+    scaleSubsLevelSize: Incomplete
+    scalePriceIncrement: Incomplete
+    scalePriceAdjustValue: Incomplete
+    scalePriceAdjustInterval: Incomplete
+    scaleProfitOffset: Incomplete
+    scaleAutoReset: bool
+    scaleInitPosition: Incomplete
+    scaleInitFillQty: Incomplete
+    scaleRandomPercent: bool
+    scaleTable: str
+    hedgeType: str
+    hedgeParam: str
+    account: str
+    settlingFirm: str
+    clearingAccount: str
+    clearingIntent: str
+    algoStrategy: str
+    algoParams: Incomplete
+    smartComboRoutingParams: Incomplete
+    algoId: str
+    whatIf: bool
+    notHeld: bool
+    solicited: bool
+    modelCode: str
+    orderComboLegs: Incomplete
+    orderMiscOptions: Incomplete
+    referenceContractId: int
+    peggedChangeAmount: float
+    isPeggedChangeAmountDecrease: bool
+    referenceChangeAmount: float
+    referenceExchangeId: str
+    adjustedOrderType: str
+    triggerPrice: Incomplete
+    adjustedStopPrice: Incomplete
+    adjustedStopLimitPrice: Incomplete
+    adjustedTrailingAmount: Incomplete
+    adjustableTrailingUnit: int
+    lmtPriceOffset: Incomplete
+    conditions: Incomplete
+    conditionsCancelOrder: bool
+    conditionsIgnoreRth: bool
+    extOperator: str
+    cashQty: Incomplete
+    mifid2DecisionMaker: str
+    mifid2DecisionAlgo: str
+    mifid2ExecutionTrader: str
+    mifid2ExecutionAlgo: str
+    dontUseAutoPriceForHedge: bool
+    isOmsContainer: bool
+    discretionaryUpToLimitPrice: bool
+    autoCancelDate: str
+    filledQuantity: Incomplete
+    refFuturesConId: int
+    autoCancelParent: bool
+    shareholder: str
+    imbalanceOnly: bool
+    routeMarketableToBbo: bool
+    parentPermId: int
+    usePriceMgmtAlgo: Incomplete
+    duration: Incomplete
+    postToAts: Incomplete
+    advancedErrorOverride: str
+    manualOrderTime: str
+    minTradeQty: Incomplete
+    minCompeteSize: Incomplete
+    competeAgainstBestOffset: Incomplete
+    midOffsetAtWhole: Incomplete
+    midOffsetAtHalf: Incomplete
+    def __init__(self) -> None: ...
