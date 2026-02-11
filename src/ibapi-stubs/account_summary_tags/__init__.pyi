@@ -1,0 +1,33 @@
+from _typeshed import Incomplete
+
+class AccountSummaryTags:
+    AccountType: str
+    NetLiquidation: str
+    TotalCashValue: str
+    SettledCash: str
+    AccruedCash: str
+    BuyingPower: str
+    EquityWithLoanValue: str
+    PreviousDayEquityWithLoanValue: str
+    GrossPositionValue: str
+    ReqTEquity: str
+    ReqTMargin: str
+    SMA: str
+    InitMarginReq: str
+    MaintMarginReq: str
+    AvailableFunds: str
+    ExcessLiquidity: str
+    Cushion: str
+    FullInitMarginReq: str
+    FullMaintMarginReq: str
+    FullAvailableFunds: str
+    FullExcessLiquidity: str
+    LookAheadNextChange: str
+    LookAheadInitMarginReq: str
+    LookAheadMaintMarginReq: str
+    LookAheadAvailableFunds: str
+    LookAheadExcessLiquidity: str
+    HighestSeverity: str
+    DayTradesRemaining: str
+    Leverage: str
+    AllTags: Incomplete
